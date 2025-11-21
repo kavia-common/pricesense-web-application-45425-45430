@@ -128,8 +128,8 @@ def update_product_patch(
 @products_router.delete(
     "/{product_id}",
     status_code=status.HTTP_204_NO_CONTENT,
+    response_model=None,
     response_class=Response,
-    response_model=None,  # Explicitly ensure no response model is used for 204
     summary="Delete product",
     description="Delete a product and associated price history and alerts.",
 )
@@ -144,7 +144,7 @@ def delete_product(
     product = _get_product_or_404(db, product_id)
     db.delete(product)
     db.commit()
-    # Intentionally do not return anything to ensure no response body for 204
+    # Do not return anything; 204 responses must have no body.
 
 
 # PUBLIC_INTERFACE
