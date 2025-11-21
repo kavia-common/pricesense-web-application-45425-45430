@@ -135,10 +135,14 @@ def delete_product(
     product_id: int = Path(..., description="Product ID"),
     db: Session = Depends(get_db),
 ) -> None:
-    """Delete a product."""
+    """Delete a product.
+
+    Note: 204 No Content must not return a response body.
+    """
     product = _get_product_or_404(db, product_id)
     db.delete(product)
     db.commit()
+    # Explicitly return None (no body) to comply with 204 semantics
     return None
 
 
