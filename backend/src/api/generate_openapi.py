@@ -13,7 +13,7 @@ to keep the API spec in sync for the frontend integration.
 # Get the OpenAPI schema
 openapi_schema = app.openapi()
 
-# Write to file
+# Ensure output path is the project interfaces folder (../interfaces from src/api/)
 output_dir = "interfaces"
 os.makedirs(output_dir, exist_ok=True)
 output_path = os.path.join(output_dir, "openapi.json")

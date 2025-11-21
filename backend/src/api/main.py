@@ -21,9 +21,10 @@ app = FastAPI(
 )
 
 # CORS
+# Note: For production, set CORS origins from env (e.g., CORS_ORIGINS). For MVP, allow all.
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # For MVP; restrict in production
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -37,7 +38,12 @@ def on_startup() -> None:
 
 
 # PUBLIC_INTERFACE
-@app.get("/", tags=["health"], summary="Health Check", description="Simple health endpoint to verify the service is running.")
+@app.get(
+    "/",
+    tags=["health"],
+    summary="Health Check",
+    description="Simple health endpoint to verify the service is running.",
+)
 def health_check():
     """Return service health."""
     return {"message": "Healthy"}
