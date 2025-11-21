@@ -3,6 +3,13 @@ import os
 
 from src.api.main import app
 
+"""
+Generate and write the OpenAPI schema to interfaces/openapi.json.
+
+Run this module (python -m src.api.generate_openapi) after adding or changing routes
+to keep the API spec in sync for the frontend integration.
+"""
+
 # Get the OpenAPI schema
 openapi_schema = app.openapi()
 
