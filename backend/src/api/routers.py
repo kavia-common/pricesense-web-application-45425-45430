@@ -129,6 +129,7 @@ def update_product_patch(
     "/{product_id}",
     status_code=status.HTTP_204_NO_CONTENT,
     response_class=Response,
+    response_model=None,  # Explicitly ensure no response model is used for 204
     summary="Delete product",
     description="Delete a product and associated price history and alerts.",
 )
