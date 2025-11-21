@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import List
 
-from fastapi import APIRouter, Depends, HTTPException, Path, Body, status
+from fastapi import APIRouter, Depends, HTTPException, Path, Body, status, Response
 from sqlalchemy.orm import Session
 
 from .db import get_db
@@ -142,8 +142,8 @@ def delete_product(
     product = _get_product_or_404(db, product_id)
     db.delete(product)
     db.commit()
-    # Explicitly return None (no body) to comply with 204 semantics
-    return None
+    # Return explicit empty Response to satisfy FastAPI assertion for 204
+    return Response(status_code=status.HTTP_204_NO_CONTENT)
 
 
 # PUBLIC_INTERFACE
