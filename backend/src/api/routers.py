@@ -143,8 +143,7 @@ def delete_product(
     product = _get_product_or_404(db, product_id)
     db.delete(product)
     db.commit()
-    # Do not return any body for 204; Response class ensures no content.
-    return None
+    # Intentionally do not return anything to ensure no response body for 204
 
 
 # PUBLIC_INTERFACE
