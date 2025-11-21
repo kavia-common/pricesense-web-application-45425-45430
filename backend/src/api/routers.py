@@ -128,6 +128,7 @@ def update_product_patch(
 @products_router.delete(
     "/{product_id}",
     status_code=status.HTTP_204_NO_CONTENT,
+    response_class=Response,
     summary="Delete product",
     description="Delete a product and associated price history and alerts.",
 )
@@ -142,8 +143,8 @@ def delete_product(
     product = _get_product_or_404(db, product_id)
     db.delete(product)
     db.commit()
-    # Return explicit empty Response to satisfy FastAPI assertion for 204
-    return Response(status_code=status.HTTP_204_NO_CONTENT)
+    # Do not return any body for 204; Response class ensures no content.
+    return None
 
 
 # PUBLIC_INTERFACE
